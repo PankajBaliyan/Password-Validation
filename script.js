@@ -1,7 +1,7 @@
-var lockIcon = document.querySelector(".fa-lock");
-var inner = document.querySelector(".inner");
-var password = document.querySelector("#myPass");
-var state = false;
+let lockIcon = document.querySelector(".fa-lock");
+let inner = document.querySelector(".inner");
+let password = document.querySelector("#myPass");
+let state = false;
 let text, validIcons, invalidIcons;
 
 /**
@@ -12,32 +12,29 @@ let text, validIcons, invalidIcons;
  */
 function toggle() {
     myFunction();
-    if (state) {
-        function displayPass() {
-            document.getElementById("myPass").setAttribute("type", "password");
-        }
-        setTimeout(displayPass, 80);
 
-        lockIcon.classList.remove("color-change");
-        inner.classList.remove("inner-hover");
-        state = false;
+    if (state) {
+        setTimeout(function() {
+            document.getElementById("myPass").setAttribute("type", "password");
+            lockIcon.classList.remove("color-change");
+            inner.classList.remove("inner-hover");
+            state = false;
+        }, 80);
     }
     else {
-        function displayText() {
+        setTimeout(function() {
             document.getElementById("myPass").setAttribute("type", "text");
-        }
-        setTimeout(displayText, 80);
-
-        lockIcon.classList.add("color-change");
-        inner.classList.add("inner-hover");
-        state = true;
+            lockIcon.classList.add("color-change");
+            inner.classList.add("inner-hover");
+            state = true;
+        }, 80);
     }
 }
 
 // used to toggle eye
 function myFunction() {
-    var eye = document.querySelector(".eye-close");
-    imgSrc = document.getElementById("img1").src;
+    let eye = document.querySelector(".eye-close"),
+        imgSrc = document.getElementById("img1").src;
     if (imgSrc.indexOf("eye-close") != -1) {
         eye.classList.add('eye-open');
         document.getElementById("img1").src = "https://i.postimg.cc/3JHFrZ3v/eye-open.png";
@@ -74,7 +71,8 @@ function textChange() {
     else
         invalid('capital', 'fa-check', 'fa-times');
 
-    if (password.value.match(/[0-9]/) != null)
+    // if (password.value.match(/[0-9]/) != null)
+    if (password.value.match(/\d/) != null)
         valid('number', 'fa-check', 'fa-times');
     else
         invalid('number', 'fa-check', 'fa-times');
